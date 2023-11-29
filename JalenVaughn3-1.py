@@ -1,10 +1,19 @@
 import formulas 
 import sys
 
-num_arg = len(sys.argv)
-values = []
+class Claculator:
+    def __iniit__(self, op, values):
+        self.op = op
+        self.values = values
+    def celcuatlate(self):
+        operators = {'add' : formulas.add, 'subtract': formulas.subtract,
+                     'multiply': formulas.multiply, 'divide' : formulas.divide,
+                     'modulo': formulas.modulo                                          
+                     }
 
 def main():
+    num_arg = len(sys.argv)
+
     if num_arg <= 1:
         print('Need to provide operator.')
         sys.exit(1)
@@ -17,14 +26,16 @@ def main():
         if op not in ('add' , 'subtract' , 'multiply', 'divide'):
             print('Valid operator names (add, subtract, multiply, divide)')
             sys.exit(1)
+    values = []
 
 
-        for arg in sys.argv[2:]:
-            try:
-                value = float(arg)
-                values.append(value)
-            except ValueError:
-                sys.exit(1)
+
+    for arg in sys.argv[2:]:
+        try:
+            value = float(arg)
+            values.append(value)
+        except ValueError:
+            sys.exit(1)
             
        
         if op == 'add':
@@ -36,7 +47,10 @@ def main():
         elif op == 'divide':
             result = formulas.divide(values)
 
-        print(f'Answer = {result:.2f}')
+    calculator = Claculator(op, values)
+    result = calculator.calculate()
+
+    print(f'Answer = {result:.2f}')
 
        
 
@@ -51,5 +65,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
