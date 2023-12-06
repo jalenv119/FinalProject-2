@@ -1,5 +1,6 @@
 import formulas 
 import sys
+import gui
 
 num_arg = len(sys.argv)
 values = []
