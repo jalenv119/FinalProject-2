@@ -1,4 +1,3 @@
-<<<<<<< 
 from PyQt6 import QtWidgets
 from logic import *
 def main():
@@ -13,6 +12,7 @@ def main():
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     main()
+   
    
 =======
 
