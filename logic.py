@@ -8,7 +8,7 @@ class Logic(QMainWindow, Ui_MainWindow):
     """ initilizes
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.setupUi(self)
         self.current_text = ""
@@ -33,7 +33,7 @@ class Logic(QMainWindow, Ui_MainWindow):
     """ if button is clicked the text on the button gets sent to the textEdit box in the gui
     """
 
-    def on_button_clicked(self):
+    def on_button_clicked(self) -> None:
         button = self.sender()
         button_text = button.text()
 
@@ -48,14 +48,14 @@ class Logic(QMainWindow, Ui_MainWindow):
     """ clears text inside the TextEdit
     """
 
-    def clear_text(self):
+    def clear_text(self) -> None:
         self.pressed_buttons = []
         self.update_text()
 
     """ shows the expression on the calculator and stores result as a string to be used for the next equation prints error if one is there inside the textEdit box
     """
 
-    def evaluate_expression(self):
+    def evaluate_expression(self) -> str:
         try:
             expression = "".join(self.pressed_buttons)
             result = eval(expression)
@@ -75,13 +75,13 @@ class Logic(QMainWindow, Ui_MainWindow):
     """ updates text when called
     """
 
-    def update_text(self):
+    def update_text(self) -> None:
         self.textEdit.setPlainText(" ".join(self.pressed_buttons))
 
     """returns the value after performing adidition
     """
 
-    def add(self, values):
+    def add(self, values) -> int:
         neg_sum = 0
         for num in values:
             if num < 0:
@@ -91,7 +91,7 @@ class Logic(QMainWindow, Ui_MainWindow):
     """returns the value after performing subtraction
     """
 
-    def subtract(self, values):
+    def subtract(self, values) -> int:
         pos_diff = None
         for num in values:
             if num > 0:
@@ -106,7 +106,7 @@ class Logic(QMainWindow, Ui_MainWindow):
     """returns the value after performing multiplication
     """
 
-    def multiply(self, values):
+    def multiply(self, values) -> int:
         multi_sum = 1
         no_zeros = False
         for num in values:
@@ -120,7 +120,7 @@ class Logic(QMainWindow, Ui_MainWindow):
     """returns the value after performing division
     """
 
-    def divide(self, values):
+    def divide(self, values) -> int:
         divi_sum = 1
         zeros = 0
 
