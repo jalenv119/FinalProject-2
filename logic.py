@@ -1,16 +1,17 @@
 from PyQt6.QtWidgets import *
 from gui import Ui_MainWindow
 
+
 class Logic(QMainWindow, Ui_MainWindow):
     pressed_buttons = []
 
-    ''' initilizes
-    '''
+    """ initilizes
+    """
 
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.current_text = ''
+        self.current_text = ""
 
         self.Number0Button.clicked.connect(self.on_button_clicked)
         self.Number1Button.clicked.connect(self.on_button_clicked)
@@ -29,8 +30,8 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.ClearButton.clicked.connect(self.on_button_clicked)
         self.SubmitButton.clicked.connect(self.on_button_clicked)
 
-    ''' if button is clicked the text on the button gets sent to the textEdit box in the gui
-    '''
+    """ if button is clicked the text on the button gets sent to the textEdit box in the gui
+    """
 
     def on_button_clicked(self):
         button = self.sender()
@@ -40,45 +41,45 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.clear_text()
         elif button_text == "SUBMIT":
             self.evaluate_expression()
-        else:            
+        else:
             self.pressed_buttons.append(button_text)
             self.update_text()
 
-    ''' clears text inside the TextEdit
-    '''
+    """ clears text inside the TextEdit
+    """
 
     def clear_text(self):
         self.pressed_buttons = []
         self.update_text()
 
-    ''' shows the expression on the calculator and stores result as a string to be used for the next equation prints error if one is there inside the textEdit box
-    '''
+    """ shows the expression on the calculator and stores result as a string to be used for the next equation prints error if one is there inside the textEdit box
+    """
 
     def evaluate_expression(self):
         try:
             expression = "".join(self.pressed_buttons)
             result = eval(expression)
-            self.textEdit.setPlainText(f'{result:.2f}')
+            self.textEdit.setPlainText(f"{result:.2f}")
             self.textEdit.setFocus()
-            self.pressed_buttons = [str(result)]  
+            self.pressed_buttons = [str(result)]
         except SyntaxError as e:
-            self.textEdit.setPlainText('please enter a number')
+            self.textEdit.setPlainText("please enter a number")
             self.pressed_buttons = []
         except ValueError as e:
             self.textEdit.setPlainText(str(e))
             self.pressed_buttons = []
         except ZeroDivisionError as e:
-            self.textEdit.setPlainText('cannot divide by 0')
+            self.textEdit.setPlainText("cannot divide by 0")
             self.pressed_buttons = []
 
+    """ updates text when called
+    """
 
-    ''' updates text when called
-    '''
     def update_text(self):
         self.textEdit.setPlainText(" ".join(self.pressed_buttons))
-    
-    '''returns the value after performing adidition
-    '''
+
+    """returns the value after performing adidition
+    """
 
     def add(self, values):
         neg_sum = 0
@@ -86,9 +87,9 @@ class Logic(QMainWindow, Ui_MainWindow):
             if num < 0:
                 neg_sum += num
         return neg_sum
-    
-    '''returns the value after performing subtraction
-    '''
+
+    """returns the value after performing subtraction
+    """
 
     def subtract(self, values):
         pos_diff = None
@@ -101,9 +102,9 @@ class Logic(QMainWindow, Ui_MainWindow):
         if pos_diff is None:
             return 0
         return pos_diff
-    
-    '''returns the value after performing multiplication
-    '''
+
+    """returns the value after performing multiplication
+    """
 
     def multiply(self, values):
         multi_sum = 1
@@ -115,9 +116,9 @@ class Logic(QMainWindow, Ui_MainWindow):
         if not no_zeros:
             return 0
         return multi_sum
-    
-    '''returns the value after performing division
-    '''
+
+    """returns the value after performing division
+    """
 
     def divide(self, values):
         divi_sum = 1
@@ -127,8 +128,8 @@ class Logic(QMainWindow, Ui_MainWindow):
             if num == 0:
                 zeros += 1
                 if zeros > 1:
-                    print('Cannot divide by 0')
-                    raise ValueError('Cannot divide by 0') 
+                    print("Cannot divide by 0")
+                    raise ValueError("Cannot divide by 0")
             else:
                 divi_sum /= num
 
