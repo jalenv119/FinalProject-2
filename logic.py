@@ -1,7 +1,13 @@
-from PyQt6 import QtWidgets
-from gui import Ui_MainWindow
+from PyQt6.QtWidgets import *
+from gui import *
 
-class Calc:
+class Logic(QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.current_text = ''
+
+
     def add(values):
         neg_sum = 0
         for num in values:
@@ -48,35 +54,3 @@ class Calc:
         if zeros == 1:
             return 0
         return divi_sum
-
-class LogicController:
-    def __init__(self, ui):
-        self.ui = ui
-
-    def process_input(self, args):
-        num_arg = len(args)
-        values = []
-
-        if num_arg <= 1 or num_arg <= 3:
-            self.show_error('Invalid input.')
-            return
-
-        op = args[1]
-        if op not in ('add', 'subtract', 'multiply', 'divide'):
-            self.show_error('Valid operator names (add, subtract, multiply, divide)')
-            return
-
-        for arg in args[2:]:
-            try:
-                value = float(arg)
-                values.append(value)
-            except ValueError:
-                self.show_error('Invalid input.')
-                return
-
-        result = getattr(Calc, op)(values)
-        expression = ' '.join(args[2:])
-        self.ui.textEdit.setPlainText(f'{expression} = {result:.2f}')
-
-    def show_error(self, message):
-        QtWidgets.QMessageBox.critical(None, "Error", message)
