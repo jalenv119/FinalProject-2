@@ -13,37 +13,4 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     main()
 
-   
-   
-=======
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-if __name__ == __main__:
-  main()
->>>>>>> refs/remotes/origin/main
