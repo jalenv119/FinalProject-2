@@ -3,15 +3,16 @@ from gui import Ui_MainWindow
 
 
 class Logic(QMainWindow, Ui_MainWindow):
-    pressed_buttons = []
+    pressed_buttons: list = []
 
-    """ initilizes
+    """ 
+    initilizes
     """
 
     def __init__(self) -> None:
         super().__init__()
         self.setupUi(self)
-        self.current_text = ""
+        self.current_text: str = ""
 
         self.Number0Button.clicked.connect(self.on_button_clicked)
         self.Number1Button.clicked.connect(self.on_button_clicked)
@@ -30,7 +31,8 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.ClearButton.clicked.connect(self.on_button_clicked)
         self.SubmitButton.clicked.connect(self.on_button_clicked)
 
-    """ if button is clicked the text on the button gets sent to the textEdit box in the gui
+    """ 
+    if button is clicked the text on the button gets sent to the textEdit box in the gui
     """
 
     def on_button_clicked(self) -> None:
@@ -45,14 +47,16 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.pressed_buttons.append(button_text)
             self.update_text()
 
-    """ clears text inside the TextEdit
+    """ 
+    clears text inside the TextEdit
     """
 
     def clear_text(self) -> None:
         self.pressed_buttons = []
         self.update_text()
 
-    """ shows the expression on the calculator and stores result as a string to be used for the next equation prints error if one is there inside the textEdit box
+    """ 
+    shows the expression on the calculator and stores result as a string to be used for the next equation prints error if one is there inside the textEdit box
     """
 
     def evaluate_expression(self) -> str:
@@ -72,13 +76,15 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.textEdit.setPlainText("cannot divide by 0")
             self.pressed_buttons = []
 
-    """ updates text when called
+    """ 
+    updates text when called
     """
 
     def update_text(self) -> None:
         self.textEdit.setPlainText(" ".join(self.pressed_buttons))
 
-    """returns the value after performing adidition
+    """
+    returns the value after performing adidition
     """
 
     def add(self, values) -> int:
@@ -88,7 +94,8 @@ class Logic(QMainWindow, Ui_MainWindow):
                 neg_sum += num
         return neg_sum
 
-    """returns the value after performing subtraction
+    """
+    returns the value after performing subtraction
     """
 
     def subtract(self, values) -> int:
@@ -103,7 +110,8 @@ class Logic(QMainWindow, Ui_MainWindow):
             return 0
         return pos_diff
 
-    """returns the value after performing multiplication
+    """
+    returns the value after performing multiplication
     """
 
     def multiply(self, values) -> int:
@@ -117,7 +125,8 @@ class Logic(QMainWindow, Ui_MainWindow):
             return 0
         return multi_sum
 
-    """returns the value after performing division
+    """
+    returns the value after performing division
     """
 
     def divide(self, values) -> int:
@@ -136,3 +145,4 @@ class Logic(QMainWindow, Ui_MainWindow):
         if zeros == 1:
             return 0
         return divi_sum
+
